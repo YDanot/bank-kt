@@ -1,9 +1,11 @@
 package domain.model
 
-data class Money(val cents: Int) {
+import java.util.*
+
+data class Money(val cents: Int, val currency: Currency = Currency.getInstance("EUR")) {
 
     operator fun plus(money: Money): Money {
-        return Money(cents + money.cents)
+        return Money(cents + money.cents, currency)
     }
 
 }

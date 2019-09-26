@@ -5,6 +5,7 @@ import domain.model.Money
 import org.assertj.core.api.Assertions
 import org.junit.Test
 import java.math.BigDecimal
+import java.util.*
 
 class DepositTest {
 
@@ -31,7 +32,10 @@ class DepositTest {
     }
 
     private fun toMoney(s: String): Money {
-        return Money(s.split(" ").get(0).toBigDecimal().multiply(BigDecimal(100)).intValueExact())
+        val split = s.split(" ")
+        val cents = split.get(0).toBigDecimal().multiply(BigDecimal(100)).intValueExact()
+        val currency = Currency.getInstance(split.get(1))
+        return Money(cents,currency)
     }
 
 
@@ -45,10 +49,6 @@ class DepositTest {
 
     private fun Money.should_be(s: String) {
         Assertions.assertThat(this).isEqualTo(toMoney(s))
-    }
-
-    private fun euros(cents: Int): Money {
-        return Money(cents)
     }
 }
 
