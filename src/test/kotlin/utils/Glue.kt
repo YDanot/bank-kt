@@ -2,6 +2,8 @@ package utils
 
 import domain.model.Account
 import domain.model.Money
+import domain.usecases.Deposit
+import domain.usecases.Withdraw
 import org.assertj.core.api.Assertions
 import java.math.BigDecimal
 import java.util.*
@@ -21,21 +23,12 @@ fun toMoney(s: String): Money {
     return Money(cents,currency)
 }
 
-
-fun when_I_deposit(s: String): Money {
-    return toMoney(s)
+fun when_I_deposit(s: String): Deposit {
+    return Deposit(toMoney(s))
 }
 
-fun when_I_withdraw(s: String): Money {
-    return toMoney(s)
-}
-
-fun Money.on(account: Account): Account {
-    return account.deposit(this)
-}
-
-fun Money.from(account: Account): Account {
-    return account.withdraw(this)
+fun when_I_withdraw(s: String): Withdraw {
+    return Withdraw(toMoney(s))
 }
 
 fun Money.should_be(s: String) {
