@@ -1,6 +1,6 @@
 package domain
 
-import domain.account.Account
+import domain.model.Account
 import domain.model.Money
 import org.assertj.core.api.Assertions
 import org.junit.Test

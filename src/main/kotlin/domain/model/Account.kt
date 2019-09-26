@@ -1,6 +1,4 @@
-package domain.account
-
-import domain.model.Money
+package domain.model
 
 class Account(private val balance: Money = Money(0)) {
 
