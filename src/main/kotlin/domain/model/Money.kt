@@ -8,4 +8,8 @@ data class Money(val cents: Int, val currency: Currency = Currency.getInstance("
         return Money(cents + money.cents, currency)
     }
 
+    operator fun minus(money: Money): Money {
+        return Money(cents - money.cents, currency)
+    }
+
 }

@@ -26,8 +26,16 @@ fun when_I_deposit(s: String): Money {
     return toMoney(s)
 }
 
+fun when_I_withdraw(s: String): Money {
+    return toMoney(s)
+}
+
 fun Money.on(account: Account): Account {
     return account.deposit(this)
+}
+
+fun Money.from(account: Account): Account {
+    return account.withdraw(this)
 }
 
 fun Money.should_be(s: String) {
