@@ -4,6 +4,7 @@ import domain.model.Account
 import domain.model.History
 import domain.model.Money
 import domain.usecases.Deposit
+import domain.usecases.GetTransactionHistory
 import domain.usecases.Withdraw
 import org.assertj.core.api.Assertions
 import java.math.BigDecimal
@@ -16,7 +17,7 @@ fun then_balance_of(account: Account): Money {
 }
 
 fun then_history_of(account: Account): History {
-    return account.history()
+    return GetTransactionHistory().of(account)
 }
 
 fun given_an_account_with(s: String): Account {
