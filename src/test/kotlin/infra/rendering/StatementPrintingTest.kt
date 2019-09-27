@@ -1,14 +1,15 @@
 package infra.rendering
 
-import domain.model.Account
+import domain.model.account.Account
 import infra.ConsoleRenderer
 import org.assertj.core.api.Assertions
 import org.junit.Test
 import utils.given_a_deposit_of
 import utils.given_a_withdrawal_of
 import utils.given_an_account
+import utils.transactionLogs
 
-class ConsoleRendererTest {
+class StatementPrintingTest {
 
     @Test
     fun statement() {
@@ -25,7 +26,7 @@ class ConsoleRendererTest {
     }
 
     private fun then_statement_history_of(account: Account): String {
-        return ConsoleRenderer().statement(account.history())
+        return ConsoleRenderer().statement(transactionLogs.logsOf(account.number())!!)
     }
 
     private fun String.should_be_printed(s: String) {

@@ -1,10 +1,11 @@
 package utils
 
-import domain.model.Account
 import domain.model.Money
+import domain.model.transaction.TransactionLogs
+import domain.model.account.Account
 import domain.usecases.command.Deposit
 
-class GlueDeposit(private val amount: Money) {
+class GlueDeposit(private val amount: Money, val transactionLogs: TransactionLogs) {
 
     private lateinit var account: Account
 
@@ -15,7 +16,7 @@ class GlueDeposit(private val amount: Money) {
 
     fun the(date: String): Account {
         val clock = clock(date)
-        return Deposit(amount, clock.now()).on(account)
+        return Deposit(amount, clock.now(), transactionLogs).on(account)
     }
 
 }

@@ -1,22 +1,22 @@
 package infra
 
-import domain.model.*
-import domain.usecases.command.Deposit
-import domain.usecases.command.Withdraw
+
+import domain.model.Money
+import domain.model.transaction.Transaction
+import domain.model.transaction.TransactionHistory
+import domain.model.transaction.TransactionType
 import java.text.NumberFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class ConsoleRenderer {
 
-    fun statement(history: History): String {
-        var account = Account()
+    fun statement(history: TransactionHistory): String {
         val headers = "date || credit || debit || balance"
-        val statements = mutableListOf<String>()
-        history.sortedBy { it.date }.forEach {
-            account = replay(it, account)
-            statements.add(render(it, account.balance()))
-        }
+        val statements =
+            history.sortedBy { it.transaction.date }.map {
+                render(it.transaction, it.accountBalance)
+            }
 
         return headers + "\n" + statements.reversed().joinToString("\n")
     }
@@ -33,13 +33,6 @@ class ConsoleRenderer {
     }
 
     fun LocalDateTime.render(): String {
-        return DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm").format(this)
-    }
-
-    private fun replay(transaction: Transaction, account: Account): Account {
-        return when (transaction.type) {
-            TransactionType.DEPOSIT -> Deposit(transaction.amount, transaction.date).on(account)
-            TransactionType.WITHDRAWAL -> Withdraw(transaction.amount, transaction.date).from(account)
-        }
+        return DateTimeFormatter.ofPattern("dd/MM/YYYY HH:mm").format(this)
     }
 }

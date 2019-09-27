@@ -1,12 +1,14 @@
 package domain.usecases.queries
 
-import domain.model.Account
-import domain.model.History
+import domain.model.account.AccountNumber
+import domain.model.transaction.TransactionHistory
+import domain.model.transaction.TransactionLogs
 
-class GetTransactionHistory() {
 
-    fun of(account: Account): History {
-        return account.history()
+class GetTransactionHistory(private val transactionLogs: TransactionLogs) {
+
+    fun of(number: AccountNumber): TransactionHistory? {
+        return transactionLogs.logsOf(number)
     }
 
 }
