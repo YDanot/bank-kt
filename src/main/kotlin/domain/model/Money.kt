@@ -17,5 +17,4 @@ data class Money(val cents: Int, val currency: Currency = Currency.getInstance("
         return NumberFormat.getCurrencyInstance().format(cents.toDouble() / 100)
     }
 
-
 }

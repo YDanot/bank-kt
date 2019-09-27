@@ -32,7 +32,8 @@ class HistoryTest {
 
 private fun History.should_contains(vararg s: String) {
     val transactions = s.map { toTransaction(it) }
-    Assertions.assertThat(this).containsExactlyElementsOf(transactions)
+    Assertions.assertThat(this).containsAll(transactions)
+    Assertions.assertThat(transactions).containsAll(this)
 }
 
 fun toTransaction(s: String): Transaction {

@@ -3,9 +3,9 @@ package utils
 import domain.model.Account
 import domain.model.History
 import domain.model.Money
-import domain.usecases.Deposit
-import domain.usecases.GetTransactionHistory
-import domain.usecases.Withdraw
+import domain.usecases.command.Deposit
+import domain.usecases.queries.GetTransactionHistory
+import domain.usecases.command.Withdraw
 import org.assertj.core.api.Assertions
 import java.math.BigDecimal
 import java.time.LocalDateTime

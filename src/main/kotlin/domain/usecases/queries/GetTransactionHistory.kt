@@ -1,4 +1,4 @@
-package domain.usecases
+package domain.usecases.queries
 
 import domain.model.Account
 import domain.model.History

@@ -2,7 +2,7 @@ package utils
 
 import domain.model.Account
 import domain.model.Money
-import domain.usecases.Deposit
+import domain.usecases.command.Deposit
 
 class GlueDeposit(private val amount: Money) {
 
@@ -15,7 +15,7 @@ class GlueDeposit(private val amount: Money) {
 
     fun the(date: String): Account {
         val clock = clock(date)
-        return Deposit(amount, clock).on(account)
+        return Deposit(amount, clock.now()).on(account)
     }
 
 }

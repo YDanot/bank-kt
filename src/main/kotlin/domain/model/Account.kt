@@ -27,7 +27,7 @@ class Account(private val balance: Money = Money(0), private val history: Histor
     }
 
     fun history(): History {
-        return history
+        return history.sortedByDescending { it.date }
     }
 
 }

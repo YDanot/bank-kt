@@ -2,7 +2,7 @@ package utils
 
 import domain.model.Account
 import domain.model.Money
-import domain.usecases.Withdraw
+import domain.usecases.command.Withdraw
 
 class GlueWithdrawal(private val amount: Money) {
 
@@ -15,7 +15,7 @@ class GlueWithdrawal(private val amount: Money) {
 
     fun the(date: String): Account {
         val clock = clock(date)
-        return Withdraw(amount, clock).from(account)
+        return Withdraw(amount, clock.now()).from(account)
     }
 
 }
