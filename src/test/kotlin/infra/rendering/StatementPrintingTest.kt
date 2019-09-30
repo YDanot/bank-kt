@@ -18,10 +18,10 @@ class StatementPrintingTest {
         account = given_a_deposit_of("2000 EUR").has_been_done_on(account).the("01/13/2012 08:00")
         account = given_a_withdrawal_of("500 EUR").has_been_done_on(account).the("01/14/2012 08:00")
         then_statement_history_of(account).should_be_printed(
-            "date || credit || debit || balance" + "\n" +
-                    "14/01/2012 08:00 || || 500,00 € || 2 500,00 €" + "\n" +
-                    "13/01/2012 08:00 || 2 000,00 € || || 3 000,00 €" + "\n" +
-                    "10/01/2012 08:00 || 1 000,00 € || || 1 000,00 €"
+            "date || credit || debit || balance",
+            "14/01/2012 08:00 || || 500,00 € || 2 500,00 €",
+            "13/01/2012 08:00 || 2 000,00 € || || 3 000,00 €",
+            "10/01/2012 08:00 || 1 000,00 € || || 1 000,00 €"
         )
     }
 
@@ -29,8 +29,9 @@ class StatementPrintingTest {
         return ConsoleRenderer().statement(transactionLogs.logsOf(account.number())!!)
     }
 
-    private fun String.should_be_printed(s: String) {
-        Assertions.assertThat(this.replace('\u00A0', ' ')).isEqualTo(s.replace('\u00A0', ' '))
+    private fun String.should_be_printed(vararg s: String) {
+        Assertions.assertThat(this.replace('\u00A0', ' ').split("\n"))
+            .containsExactlyElementsOf(s.map { it.replace('\u00A0', ' ') })
     }
 
 }
