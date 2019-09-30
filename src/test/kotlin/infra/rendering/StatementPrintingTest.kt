@@ -10,10 +10,10 @@ class StatementPrintingTest {
 
     @Test
     fun statement() {
-        var account = given_an_account()
-        account = given_a_deposit_of("1000 EUR").has_been_done_on(account).the("01/10/2012 08:00")
-        account = given_a_deposit_of("2000 EUR").has_been_done_on(account).the("01/13/2012 08:00")
-        account = given_a_withdrawal_of("500 EUR").has_been_done_on(account).the("01/14/2012 08:00")
+        val account = given_an_account()
+        given_a_deposit_of("1000 EUR").has_been_done_on(account).the("01/10/2012 08:00")
+        given_a_deposit_of("2000 EUR").has_been_done_on(account).the("01/13/2012 08:00")
+        given_a_withdrawal_of("500 EUR").has_been_done_on(account).the("01/14/2012 08:00")
         then_statement_history_of(account).should_be_printed(
             "date || credit || debit || balance",
             "14/01/2012 08:00 || || 500,00 € || 2 500,00 €",

@@ -48,7 +48,7 @@ fun toMoney(s: String): Money {
 }
 
 fun when_I_deposit(s: String): GlueDeposit {
-    return GlueDeposit(toMoney(s), transactionLogs)
+    return GlueDeposit(toMoney(s), transactionLogs, accountRepository)
 }
 
 fun when_I_transfer(s: String): GlueTransfer {
@@ -60,15 +60,15 @@ fun given_a_transfer_of(s: String): GlueTransfer {
 }
 
 fun given_a_deposit_of(s: String): GlueDeposit {
-    return GlueDeposit(toMoney(s), transactionLogs)
+    return GlueDeposit(toMoney(s), transactionLogs, accountRepository)
 }
 
 fun given_a_withdrawal_of(s: String): GlueWithdrawal {
-    return GlueWithdrawal(toMoney(s), transactionLogs)
+    return GlueWithdrawal(toMoney(s), transactionLogs, accountRepository)
 }
 
 fun when_I_withdraw(s: String): GlueWithdrawal {
-    return GlueWithdrawal(toMoney(s), transactionLogs)
+    return GlueWithdrawal(toMoney(s), transactionLogs, accountRepository)
 }
 
 fun Money.should_be(s: String) {

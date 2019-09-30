@@ -57,7 +57,7 @@ private fun TransactionHistory.should_contains(vararg s: String) {
 }
 
 fun toTransaction(s: String): Transaction {
-    val groups: MatchGroupCollection = "^([+|-|<|>]) (\\d+ .*) the (.*)".toRegex().find(s)!!.groups
+    val groups: MatchGroupCollection = "^([+|\\-|<|>]) (\\d+ .*) the (.*)".toRegex().find(s)!!.groups
 
     return Transaction(
         type(groups[1]!!.value),

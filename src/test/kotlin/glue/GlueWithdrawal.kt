@@ -3,9 +3,14 @@ package glue
 import domain.model.Money
 import domain.model.transaction.TransactionLogs
 import domain.model.account.Account
+import domain.model.account.AccountRepository
 import domain.usecases.command.Withdraw
 
-class GlueWithdrawal(private val amount: Money, private val transactionLogs: TransactionLogs) {
+class GlueWithdrawal(
+    private val amount: Money,
+    private val transactionLogs: TransactionLogs,
+    private val accountRepository: AccountRepository
+) {
 
     private lateinit var account: Account
     private var clock = clock("09/30/2019 10:00")
@@ -21,6 +26,6 @@ class GlueWithdrawal(private val amount: Money, private val transactionLogs: Tra
     }
 
     fun from(account: Account): Account {
-        return Withdraw(amount, clock.now(), transactionLogs, accountRepository).from(account)
+        return Withdraw(amount, clock.now(), transactionLogs, accountRepository).from(account.number())
     }
 }
