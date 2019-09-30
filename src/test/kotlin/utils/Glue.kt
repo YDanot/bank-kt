@@ -1,12 +1,15 @@
 package utils
 
 import domain.model.Money
+import domain.model.account.Account
+import domain.model.account.AccountNumber
+import domain.model.account.AccountRepository
 import domain.model.transaction.TransactionHistory
 import domain.model.transaction.TransactionLogs
-import domain.model.account.Account
 import domain.usecases.command.Deposit
 import domain.usecases.command.Withdraw
 import domain.usecases.queries.GetTransactionHistory
+import infra.InMemoryAccountRepository
 import infra.InMemoryTransactionLogs
 import org.assertj.core.api.Assertions
 import java.math.BigDecimal
@@ -15,6 +18,11 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 val transactionLogs: TransactionLogs = InMemoryTransactionLogs()
+val accountRepository: AccountRepository = InMemoryAccountRepository()
+
+fun then_balance_of(accountNumber: AccountNumber): Money {
+    return accountRepository.get(accountNumber).balance()
+}
 
 fun then_balance_of(account: Account): Money {
     return account.balance()
@@ -24,8 +32,9 @@ fun then_history_of(account: Account): TransactionHistory {
     return GetTransactionHistory(transactionLogs).of(account.number())!!
 }
 
+fun given_an_other_account_with(s: String) = given_an_account_with(s)
 fun given_an_account_with(s: String): Account {
-    return Account(toMoney(s))
+    return accountRepository.save(Account(toMoney(s)))
 }
 
 fun given_an_account(): Account {
@@ -41,6 +50,10 @@ fun toMoney(s: String): Money {
 
 fun when_I_deposit(s: String): Deposit {
     return Deposit(toMoney(s))
+}
+
+fun when_I_transfer(s: String): GlueTransfer {
+    return GlueTransfer(accountRepository).of(toMoney(s))
 }
 
 fun given_a_deposit_of(s: String): GlueDeposit {
