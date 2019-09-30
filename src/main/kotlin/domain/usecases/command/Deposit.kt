@@ -15,9 +15,9 @@ import java.time.LocalDateTime
 
 class Deposit(
     private val amount: Money,
-    private val time: LocalDateTime = SystemClock().now(),
-    private val transactionLogs: TransactionLogs = InMemoryTransactionLogs(),
-    private val accountRepository: AccountRepository = InMemoryAccountRepository()
+    private val time: LocalDateTime,
+    private val transactionLogs: TransactionLogs,
+    private val accountRepository: AccountRepository
 ) {
 
     fun on(accountNumber: AccountNumber): Account {

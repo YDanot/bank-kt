@@ -15,9 +15,9 @@ import java.time.LocalDateTime
 
 class Withdraw(
     private val amount: Money,
-    private val time: LocalDateTime = SystemClock().now(),
-    private val transactionLog: TransactionLogs = InMemoryTransactionLogs(),
-    private val accountRepository: AccountRepository = InMemoryAccountRepository()
+    private val time: LocalDateTime,
+    private val transactionLog: TransactionLogs,
+    private val accountRepository: AccountRepository
 ) {
 
     fun from(accountNumber: AccountNumber): Account {

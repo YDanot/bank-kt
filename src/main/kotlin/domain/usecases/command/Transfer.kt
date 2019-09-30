@@ -15,9 +15,9 @@ import java.time.LocalDateTime
 class Transfer(
     private val amount: Money,
     from: AccountNumber,
-    private val time: LocalDateTime = SystemClock().now(),
-    private val repo: AccountRepository = InMemoryAccountRepository(),
-    private val transactionLogs: TransactionLogs = InMemoryTransactionLogs()
+    private val time: LocalDateTime,
+    private val repo: AccountRepository,
+    private val transactionLogs: TransactionLogs
 ) {
 
     private val accountFrom: Account = repo.get(from)
