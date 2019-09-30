@@ -1,7 +1,7 @@
 package domain
 
 import org.junit.Test
-import utils.*
+import glue.*
 
 class DepositTest {
 

@@ -1,4 +1,4 @@
-package utils
+package glue
 
 import domain.model.Money
 import domain.model.account.AccountNumber

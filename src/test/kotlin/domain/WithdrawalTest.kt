@@ -1,10 +1,10 @@
 package domain
 
 import org.junit.Test
-import utils.given_an_account_with
-import utils.should_be
-import utils.then_balance_of
-import utils.when_I_withdraw
+import glue.given_an_account_with
+import glue.should_be
+import glue.then_balance_of
+import glue.when_I_withdraw
 
 class WithdrawalTest {
 

@@ -5,7 +5,7 @@ import domain.model.transaction.TransactionHistory
 import domain.model.transaction.TransactionType
 import org.assertj.core.api.Assertions
 import org.junit.Test
-import utils.*
+import glue.*
 
 class HistoryTest {
 

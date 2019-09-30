@@ -4,10 +4,10 @@ import domain.model.account.Account
 import infra.ConsoleRenderer
 import org.assertj.core.api.Assertions
 import org.junit.Test
-import utils.given_a_deposit_of
-import utils.given_a_withdrawal_of
-import utils.given_an_account
-import utils.transactionLogs
+import glue.given_a_deposit_of
+import glue.given_a_withdrawal_of
+import glue.given_an_account
+import glue.transactionLogs
 
 class StatementPrintingTest {
 

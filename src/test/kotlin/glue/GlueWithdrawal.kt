@@ -1,9 +1,8 @@
-package utils
+package glue
 
 import domain.model.Money
 import domain.model.transaction.TransactionLogs
 import domain.model.account.Account
-import domain.usecases.command.Deposit
 import domain.usecases.command.Withdraw
 
 class GlueWithdrawal(private val amount: Money, private val transactionLogs: TransactionLogs) {
