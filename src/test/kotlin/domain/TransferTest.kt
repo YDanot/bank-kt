@@ -6,7 +6,7 @@ import glue.*
 class TransferTest {
 
     @Test
-    fun should() {
+    fun should_transfer_from_an_account_to_another() {
         val account1 = given_an_account_with("100 EUR")
         val account2 = given_an_other_account_with("100 EUR")
 

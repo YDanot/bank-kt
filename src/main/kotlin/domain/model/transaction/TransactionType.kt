@@ -2,5 +2,9 @@ package domain.model.transaction
 
 enum class TransactionType {
 
-    DEPOSIT, WITHDRAWAL
+    DEPOSIT, WITHDRAWAL,
+
+    INWARD_TRANSFER,
+
+    OUTGOING_TRANSFER
 }

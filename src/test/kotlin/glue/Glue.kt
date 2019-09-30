@@ -35,6 +35,7 @@ fun given_an_account_with(s: String): Account {
     return accountRepository.save(Account(toMoney(s)))
 }
 
+fun given_an_other_account() = given_an_account()
 fun given_an_account(): Account {
     return accountRepository.save(Account(toMoney("0 EUR")))
 }
@@ -51,7 +52,11 @@ fun when_I_deposit(s: String): GlueDeposit {
 }
 
 fun when_I_transfer(s: String): GlueTransfer {
-    return GlueTransfer(accountRepository).of(toMoney(s))
+    return GlueTransfer(accountRepository, transactionLogs).of(toMoney(s))
+}
+
+fun given_a_transfer_of(s: String): GlueTransfer {
+    return GlueTransfer(accountRepository, transactionLogs).of(toMoney(s))
 }
 
 fun given_a_deposit_of(s: String): GlueDeposit {

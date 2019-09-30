@@ -23,8 +23,10 @@ class ConsoleRenderer {
 
     private fun render(transaction: Transaction, balance: Money): String {
         return when (transaction.type) {
-            TransactionType.DEPOSIT -> "${transaction.date.render()} || ${transaction.amount.render()} || || ${balance.render()}"
-            TransactionType.WITHDRAWAL -> "${transaction.date.render()} || || ${transaction.amount.render()} || ${balance.render()}"
+            TransactionType.DEPOSIT, TransactionType.INWARD_TRANSFER ->
+                "${transaction.date.render()} || ${transaction.amount.render()} || || ${balance.render()}"
+            TransactionType.WITHDRAWAL, TransactionType.OUTGOING_TRANSFER ->
+                "${transaction.date.render()} || || ${transaction.amount.render()} || ${balance.render()}"
         }
     }
 
