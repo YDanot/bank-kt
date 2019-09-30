@@ -11,9 +11,9 @@ class HistoryTest {
 
     @Test
     fun deposit_should_be_added_to_history() {
-        var account = given_an_account()
-        account = given_a_deposit_of("100 EUR").has_been_done_on(account).the("04/04/2019 08:00")
-        account = given_a_deposit_of("110 EUR").has_been_done_on(account).the("04/05/2019 08:00")
+        val account = given_an_account()
+        given_a_deposit_of("100 EUR").has_been_done_on(account).the("04/04/2019 08:00")
+        given_a_deposit_of("110 EUR").has_been_done_on(account).the("04/05/2019 08:00")
         then_history_of(account).should_contains(
             "+ 100 EUR the 04/04/2019 08:00",
             "+ 110 EUR the 04/05/2019 08:00"
@@ -22,9 +22,9 @@ class HistoryTest {
 
     @Test
     fun withdrawal_should_be_added_to_history() {
-        var account = given_an_account_with("250 EUR")
-        account = given_a_withdrawal_of("100 EUR").has_been_done_on(account).the("04/04/2019 08:00")
-        account = given_a_withdrawal_of("110 EUR").has_been_done_on(account).the("04/05/2019 08:00")
+        val account = given_an_account_with("250 EUR")
+        given_a_withdrawal_of("100 EUR").has_been_done_on(account).the("04/04/2019 08:00")
+        given_a_withdrawal_of("110 EUR").has_been_done_on(account).the("04/05/2019 08:00")
         then_history_of(account).should_contains(
             "- 100 EUR the 04/04/2019 08:00",
             "- 110 EUR the 04/05/2019 08:00"

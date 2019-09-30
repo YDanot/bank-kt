@@ -6,8 +6,6 @@ import domain.model.account.AccountNumber
 import domain.model.account.AccountRepository
 import domain.model.transaction.TransactionHistory
 import domain.model.transaction.TransactionLogs
-import domain.usecases.command.Deposit
-import domain.usecases.command.Withdraw
 import domain.usecases.queries.GetTransactionHistory
 import infra.InMemoryAccountRepository
 import infra.InMemoryTransactionLogs
@@ -25,7 +23,7 @@ fun then_balance_of(accountNumber: AccountNumber): Money {
 }
 
 fun then_balance_of(account: Account): Money {
-    return account.balance()
+    return then_balance_of(account.number())
 }
 
 fun then_history_of(account: Account): TransactionHistory {
@@ -38,7 +36,7 @@ fun given_an_account_with(s: String): Account {
 }
 
 fun given_an_account(): Account {
-    return Account(toMoney("0 EUR"))
+    return accountRepository.save(Account(toMoney("0 EUR")))
 }
 
 fun toMoney(s: String): Money {
@@ -48,8 +46,8 @@ fun toMoney(s: String): Money {
     return Money(cents, currency)
 }
 
-fun when_I_deposit(s: String): Deposit {
-    return Deposit(toMoney(s))
+fun when_I_deposit(s: String): GlueDeposit {
+    return GlueDeposit(toMoney(s), transactionLogs)
 }
 
 fun when_I_transfer(s: String): GlueTransfer {
@@ -64,8 +62,8 @@ fun given_a_withdrawal_of(s: String): GlueWithdrawal {
     return GlueWithdrawal(toMoney(s), transactionLogs)
 }
 
-fun when_I_withdraw(s: String): Withdraw {
-    return Withdraw(toMoney(s))
+fun when_I_withdraw(s: String): GlueWithdrawal {
+    return GlueWithdrawal(toMoney(s), transactionLogs)
 }
 
 fun Money.should_be(s: String) {

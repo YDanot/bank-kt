@@ -1,13 +1,14 @@
 package utils
 
 import domain.model.Money
-import domain.model.transaction.TransactionLogs
 import domain.model.account.Account
+import domain.model.transaction.TransactionLogs
 import domain.usecases.command.Deposit
 
-class GlueDeposit(private val amount: Money, val transactionLogs: TransactionLogs) {
+class GlueDeposit(private val amount: Money, private val transactionLogs: TransactionLogs) {
 
     private lateinit var account: Account
+    private var clock = clock("09/30/2019 10:00")
 
     fun has_been_done_on(account: Account): GlueDeposit {
         this.account = account
@@ -15,8 +16,12 @@ class GlueDeposit(private val amount: Money, val transactionLogs: TransactionLog
     }
 
     fun the(date: String): Account {
-        val clock = clock(date)
-        return Deposit(amount, clock.now(), transactionLogs).on(account)
+        clock = clock(date)
+        return on(account)
+    }
+
+    fun on(account: Account): Account {
+        return Deposit(amount, clock.now(), transactionLogs, accountRepository).on(account)
     }
 
 }

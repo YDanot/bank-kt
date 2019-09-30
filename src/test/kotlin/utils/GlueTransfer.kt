@@ -5,7 +5,7 @@ import domain.model.account.AccountNumber
 import domain.model.account.AccountRepository
 import domain.transfer.Transfer
 
-class GlueTransfer(val accountRepository: AccountRepository) {
+class GlueTransfer(private val accountRepository: AccountRepository) {
 
     private lateinit var amount: Money
     private lateinit var from: AccountNumber
