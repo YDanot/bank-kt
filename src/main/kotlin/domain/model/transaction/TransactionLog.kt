@@ -4,6 +4,5 @@ import domain.model.Money
 
 data class TransactionLog(
     val transaction: Transaction,
-    val accountBalance: Money,
-    val transactionId: TransactionId = TransactionId()
+    val accountBalance: Money
 )
